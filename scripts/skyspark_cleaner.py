@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
+
 class SkySparkCleaner():
     def __init__(self, raw_dir="../data/raw", clean_dir="../data/clean"):
         self.raw_dir = Path(raw_dir)
@@ -13,7 +14,7 @@ class SkySparkCleaner():
         """
         dupe_cols = [col for col in df.columns if any(c.isdigit() for c in col)]
         return df.drop(columns=dupe_cols)
-    
+
     def split_timestamp(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Add 'Date' and 'Time' columns by splitting ISO timestamp in column 'ts'.
@@ -25,7 +26,7 @@ class SkySparkCleaner():
         df["Time"] = ts.str.slice(ts.str.find("T") + 1, ts.str.find("Z"))
 
         return df
-    
+
     def convert_building_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Convert building-related columns to float after removing invalid characters.
@@ -40,7 +41,7 @@ class SkySparkCleaner():
             .astype(float)
         )
         return df
-    
+
     # -----------------------------
     # Full Cleaning Pipeline
     # -----------------------------
@@ -52,7 +53,7 @@ class SkySparkCleaner():
         df = self.split_timestamp(df)
         df = self.convert_building_columns(df)
         return df
-    
+
     # -----------------------------
     # File Handling
     # -----------------------------
@@ -81,6 +82,7 @@ class SkySparkCleaner():
         """
         for f in self.get_all_raw_files():
             self.clean_file(f)
+
 
 if __name__ == "__main__":
     cleaner = SkySparkCleaner()
