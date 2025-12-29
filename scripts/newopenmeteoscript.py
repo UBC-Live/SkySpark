@@ -8,7 +8,7 @@ download_url = "https://api.open-meteo.com/v1/forecast?latitude=49.265&longitude
 response = requests.get(download_url, headers={}, stream=True)
 
 if response.status_code == 200:  # successful request
-    with open("data.csv", "wb") as f:
+    with open("data/raw/weather/weather_data.csv", "wb") as f:
         for chunk in response.iter_content(8192):
             if chunk:
                 f.write(chunk)
@@ -17,6 +17,7 @@ else:
     print(f"Failed to download. Status code: {response.status_code}")   
     print("Response content (first 500 chars):")
     print(response.text[:500])
+
 
 
 
