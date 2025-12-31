@@ -21,4 +21,3 @@ else:
     print(f"Failed to download. Status code: {response.status_code}")
     print("Response content (first 500 chars):")
     print(response.text[:500])
-
