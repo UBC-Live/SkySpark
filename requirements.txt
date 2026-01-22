@@ -2,3 +2,6 @@ numpy==2.0.2
 pandas==2.3.3
 pip==25.3
 python-dotenv==1.2.1
+openmeteo-requests==1.7.4
+retry-requests==2.0.0
+requests-cache==1.2.1
